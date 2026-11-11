@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>HTK Match — Case Study</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 15mm; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", "Inter", Arial, sans-serif;
+    color: #15202f;
+    font-size: 10pt;
+    line-height: 1.52;
+  }
+  h1, h2, h3 { color: #0b1220; margin: 0; }
+  h1 { font-size: 29pt; letter-spacing: -0.5pt; line-height: 1.1; }
+  h2 {
+    font-size: 14.5pt;
+    margin: 0 0 9pt;
+    padding-bottom: 5pt;
+    border-bottom: 2px solid #0ea5e9;
+  }
+  h3 { font-size: 10.8pt; margin: 11pt 0 4pt; }
+  p { margin: 0 0 6.5pt; }
+  ul, ol { margin: 0 0 7pt 15pt; padding: 0; }
+  li { margin-bottom: 2.5pt; }
+  code {
+    font-family: "Cascadia Mono", Consolas, monospace;
+    background: #eef4fa;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 8.8pt;
+  }
+  .sheet { page-break-after: always; min-height: 254mm; }
+  .sheet:last-child { page-break-after: auto; }
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 258mm;
+  }
+  .eyebrow {
+    font-size: 8.8pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #0284c7;
+    font-weight: 700;
+  }
+  .cover-rule { width: 64pt; height: 4pt; background: #0ea5e9; margin: 17pt 0; }
+  .cover-sub { font-size: 12.5pt; color: #334155; max-width: 135mm; }
+  .meta { font-size: 10pt; color: #475569; }
+  .meta strong { color: #0b1220; }
+  .arch {
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 7.7pt;
+    line-height: 1.42;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 8pt 10pt;
+    white-space: pre;
+    margin: 6pt 0 8pt;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 5pt 0 9pt; font-size: 9.1pt; }
+  th, td { text-align: left; padding: 4pt 6pt; border-bottom: 1px solid #dbe3ee; vertical-align: top; }
+  th { background: #f1f5f9; color: #0b1220; }
+  .note {
+    background: #f0f9ff;
+    border-left: 3px solid #0ea5e9;
+    padding: 6.5pt 9pt;
+    margin: 7pt 0;
+    color: #0f2a43;
+  }
+  .warn {
+    background: #fff7ed;
+    border-left: 3px solid #f59e0b;
+    padding: 6.5pt 9pt;
+    margin: 7pt 0;
+    color: #57350a;
+  }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 13pt; }
+  .compact { font-size: 9.5pt; line-height: 1.46; }
+  .compact h2 { margin-bottom: 7pt; }
+  .compact h3 { margin: 8pt 0 3pt; }
+  .compact p { margin-bottom: 5pt; }
+  .compact table { margin: 4pt 0 7pt; }
+  .compact th, .compact td { padding: 3pt 5pt; }
+  .compact li { margin-bottom: 2pt; }
+  .kpi { border: 1px solid #dbe3ee; border-radius: 6px; padding: 7pt 9pt; }
+  .kpi b { display: block; font-size: 15pt; color: #0284c7; }
+  .kpi span { font-size: 8.4pt; color: #475569; }
+  .small { font-size: 8.6pt; color: #475569; }
+  .flow {
+    border: 1px solid #dbe3ee;
+    border-radius: 6px;
+    padding: 7pt 9pt;
+    margin: 6pt 0;
+    background: #fbfdff;
+  }
+  .flow b { color: #0369a1; }
+  .tag {
+    display: inline-block;
+    font-size: 8.2pt;
+    border: 1px solid #bae6fd;
+    color: #0369a1;
+    border-radius: 999px;
+    padding: 1px 7px;
+    margin-right: 4pt;
+    background: #f0f9ff;
+  }
+</style>
+</head>
+<body>
+
+<section class="sheet cover">
+  <div>
+    <p class="eyebrow">Case Study · HTK 0396241674</p>
+    <div class="cover-rule"></div>
+    <h1>HTK Match</h1>
+    <p class="cover-sub">
+      Workspace sàng CV có thể kiểm chứng: xếp hạng theo kỹ năng kèm giải thích, golden set nhãn
+      0/1/2, precision@5 – recall@10 – MRR và cổng chặn hồi quy.
+    </p>
+    <p style="margin-top:14pt">
+      <span class="tag">Next.js 15</span>
+      <span class="tag">React 19</span>
+      <span class="tag">TypeScript</span>
+      <span class="tag">PGlite</span>
+      <span class="tag">Vercel Blob</span>
+      <span class="tag">Vitest</span>
+    </p>
+  </div>
+  <div>
+    <p class="meta">
+      <strong>Tác giả:</strong> HTK 0396241674<br />
+      <strong>Ngày:</strong> 11/11/2026<br />
+      <strong>Phạm vi:</strong> dự án 08/10 trong portfolio full-stack — nhóm Commercial SaaS &amp; Dev Tools<br />
+      <strong>Live:</strong> https://htk-resume-matcher.vercel.app
+    </p>
+    <div class="cover-rule" style="margin-bottom:0"></div>
+    <p class="small">
+      Tài liệu gồm 6 trang: bài toán, kiến trúc và mô hình chấm điểm, quy trình đánh giá, đánh đổi kèm
+      số đo thật, và bài học sau khi triển khai.
+    </p>
+  </div>
+</section>
+
+<section class="sheet">
+  <h2>1. Bài toán</h2>
+  <p>
+    Một recruiter nhận 100–300 CV cho mỗi vị trí. Công cụ phổ biến là lọc từ khoá hoặc một mô hình
+    AI không giải thích được. Cả hai đều có cùng vấn đề: không ai biết chất lượng xếp hạng đang tăng
+    hay giảm sau mỗi lần đổi từ khoá, trọng số hay nhà cung cấp mô hình.
+  </p>
+  <p>
+    HTK Match chọn hướng ngược lại: dùng một bộ chấm điểm đơn giản, tất định, giải thích được từng
+    dòng; đặt nó lên một golden set do con người chấm; và biến kết quả đo thành một cổng chặn hồi quy.
+    Mục tiêu không phải “AI tuyển người” mà là <em>làm cho quyết định sàng lọc có thể kiểm tra lại</em>.
+  </p>
+
+  <h3>Bốn kiểu thất bại cần chặn</h3>
+  <ol>
+    <li><strong>Hộp đen.</strong> Ứng viên bị loại nhưng recruiter không biết vì thiếu kỹ năng nào, thiếu bao nhiêu năm hay do nhiễu văn bản.</li>
+    <li><strong>Đổi thuật toán mù.</strong> Thêm một alias kỹ năng có thể đẩy một nhóm ứng viên lên mà không ai đo được tác động.</li>
+    <li><strong>Tự khen.</strong> Nếu dùng chính feedback “phù hợp” để tính điểm chất lượng, hệ thống luôn đạt điểm cao dù xếp hạng sai.</li>
+    <li><strong>Rò dữ liệu.</strong> CV là dữ liệu cá nhân; gửi toàn bộ nội dung sang API bên thứ ba chỉ để xếp hạng là đánh đổi không cần thiết.</li>
+  </ol>
+
+  <h3>Yêu cầu và ràng buộc</h3>
+  <table>
+    <tr><th style="width:34%">Yêu cầu</th><th>Cách hiện thực</th></tr>
+    <tr><td>Xếp hạng giải thích được</td><td>Ba thành phần điểm rời, kỹ năng khớp/thiếu, lý do seniority và IDF cho từng ứng viên.</td></tr>
+    <tr><td>Đo được chất lượng</td><td>Nhãn vàng 0/1/2, precision@5, recall@10, MRR; lưu mọi lần chạy.</td></tr>
+    <tr><td>Chặn hồi quy</td><td>Ngưỡng 0,60 / 0,90 / 0,80; fail rõ trên dashboard và trong lịch sử.</td></tr>
+    <tr><td>Tách phép đo khỏi cá nhân hoá</td><td>Gate chấm ranking thuần; feedback chỉ cộng/trừ 0,12 khi hiển thị.</td></tr>
+    <tr><td>Không gửi CV ra ngoài</td><td>Toàn bộ xử lý trong Next.js; không gọi dịch vụ AI/embedding.</td></tr>
+    <tr><td>Nhiều tài khoản</td><td>Mọi truy vấn lọc theo <code>user_id</code>; job của người khác trả 404.</td></tr>
+  </table>
+
+  <h3>Tiêu chí thành công</h3>
+  <ul>
+    <li>Recruiter nhìn một dòng biết ngay vì sao ứng viên đứng vị trí đó và thiếu gì để lên.</li>
+    <li>Một thay đổi làm precision@5 tụt dưới 60% phải bị phát hiện trong cùng lần chạy đánh giá.</li>
+    <li>Upload một CV văn bản xong, ứng viên xuất hiện trong mọi bảng xếp hạng mà không cần nhập tay kỹ năng.</li>
+    <li>Dashboard nêu rõ số nhãn, số feedback và trạng thái cổng, không dùng số liệu ước lượng.</li>
+  </ul>
+
+  <div class="note">
+    Phạm vi dữ liệu là 3 vị trí × 12 CV × 36 nhãn trong bản demo. Đây là quy mô đủ để chứng minh
+    quy trình đo, không phải tuyên bố về độ chính xác trên thị trường tuyển dụng thật.
+  </div>
+</section>
+
+<section class="sheet">
+  <h2>2. Giải pháp — kiến trúc và mô hình chấm điểm</h2>
+
+<pre class="arch">
+Browser (React 19, client components)
+  |  fetch JSON, cookie httpOnly "htk_resume_session"
+  v
+Next.js 15 route handlers (Node runtime)
+  auth ─ rate-limit ─ zod ─ data access ─ eval
+  |            |                          |
+  |            +--> rate_limits           +--> match.ts -> text.ts
+  |                 (fixed window 60s)         (normalize, IDF)
+  v
+PGlite (PostgreSQL WASM)
+  users · sessions · jobs · candidates
+  golden_labels · feedback · eval_runs · request_logs
+  |
+  v  snapshot JSON khi chạy Vercel
+Vercel Blob private "state/resume-matcher.json"
+  GET HEAD ETag -> thay state cục bộ khi instance khác ghi
+</pre>
+
+  <p>
+    Mọi request đi qua một wrapper chung: sinh <code>x-request-id</code>, bắt lỗi thành JSON
+    <code>{ error: { code, message } }</code>, ghi log dòng JSON và bảng <code>request_logs</code>.
+    Các endpoint nhạy cảm (login, upload CV, nhãn, eval) gọi rate limit trước khi đọc body nghiệp vụ.
+  </p>
+
+  <h3>Công thức điểm</h3>
+  <p>
+    Với mỗi cặp job–ứng viên, điểm nằm trong khoảng 0..1:
+  </p>
+  <ul>
+    <li><strong>0,5 × phủ kỹ năng</strong> — tỉ lệ kỹ năng bắt buộc có mặt, sau khi chuẩn hoá alias.</li>
+    <li><strong>0,32 × trùng từ khoá IDF</strong> — phần khối lượng từ của job (mô tả, tiêu đề, kỹ năng nhân ba) xuất hiện trong CV; từ hiếm có trọng số cao hơn.</li>
+    <li><strong>0,18 × mức kinh nghiệm</strong> — <code>min(1, years / minYears)</code>; thiếu năm bị phạt tuyến tính.</li>
+    <li><strong>±0,12 feedback</strong> — chỉ áp dụng khi trả ranking cho recruiter, không áp dụng trong eval.</li>
+  </ul>
+  <p>
+    Kỹ năng được nhận diện theo token trọn vẹn, không phải substring: <code>ts</code> không khớp
+    “tests”, <code>node.js</code> khớp “Node.js” và alias “nodejs”, nhưng “reactive” không bị tính
+    là React. Số năm lấy từ trường có cấu trúc, nếu trống mới đọc câu “6 năm kinh nghiệm”.
+  </p>
+
+  <h3>Vì sao tất định thay vì embedding</h3>
+  <table>
+    <tr><th style="width:28%">Tiêu chí</th><th>So khớp từ vựng + IDF</th><th>Embedding / API AI</th></tr>
+    <tr><td>Kết quả lặp lại</td><td>Có, cùng input → cùng điểm</td><td>Phụ thuộc model, version, tham số</td></tr>
+    <tr><td>Dữ liệu CV</td><td>Không rời khỏi server</td><td>Gửi sang bên thứ ba</td></tr>
+    <tr><td>Giải thích</td><td>Chỉ ra đúng kỹ năng và token đóng góp</td><td>Khó quy trách nhiệm từng phần</td></tr>
+    <tr><td>Ngữ nghĩa</td><td>Yếu: “backend thiếu TypeScript” có thể xếp dưới “frontend có TypeScript”</td><td>Tốt hơn nhưng vẫn cần golden set để kiểm tra</td></tr>
+  </table>
+  <p>
+    Chọn vế trái vì bài toán của dự án là <em>đo lường</em>, không phải tối đa hoá độ thông minh.
+    Hàm xếp hạng nằm gọn trong <code>lib/match.ts</code>; thay bằng embedding không đổi golden set,
+    gate hay lịch sử eval.
+  </p>
+</section>
+
+<section class="sheet">
+  <h2>3. Giải pháp — đánh giá, cổng hồi quy và vòng phản hồi</h2>
+
+  <div class="flow">
+    <b>Luồng một lần đánh giá</b><br />
+    chọn job có nhãn → xếp hạng toàn bộ CV (không feedback) → cắt top 5 và top 10 → tính P@5, R@10,
+    MRR theo từng job → lấy trung bình theo job → so ngưỡng → lưu <code>eval_runs.detail</code>.
+  </div>
+
+  <h3>Định nghĩa ba chỉ số</h3>
+  <ul>
+    <li><strong>Precision@5</strong> = số ứng viên có nhãn ≥ 1 trong top 5 / min(5, số ứng viên). Đo top 5 có bị nhiễu không.</li>
+    <li><strong>Recall@10</strong> = số ứng viên liên quan trong top 10 / tổng số ứng viên liên quan. Đo có bỏ sót người tốt không.</li>
+    <li><strong>MRR</strong> = 1 / vị trí của ứng viên liên quan đầu tiên. Đo người tốt nhất có bị đẩy xuống không.</li>
+  </ul>
+  <p>
+    Ba chỉ số bổ sung nhau: precision cao nhưng recall thấp là bỏ sót; recall cao nhưng MRR thấp là
+    tìm thấy nhưng xếp sai thứ tự. Ngưỡng hiện tại <strong>0,60 / 0,90 / 0,80</strong>, thấp hơn baseline
+    một khoảng để bắt được tụt giảm thật thay vì fail vì dao động nhỏ.
+  </p>
+
+  <h3>Golden set và chống tự khen</h3>
+  <p>
+    Mỗi job có nhãn 0/1/2 cho toàn bộ 12 ứng viên. Nhãn 0 được lưu thành hàng thật, nên precision
+    phạt được cả trường hợp xếp người không liên quan vào top 5. Feedback “phù hợp / không phù hợp” là
+    tín hiệu riêng của recruiter, được cộng/trừ 0,12 khi xem ranking nhưng bị loại khỏi đầu vào của
+    eval. Nếu gộp hai thứ, hệ thống sẽ tự khen chính lần bấm của mình.
+  </p>
+
+  <h3>Ba lớp chống lỗi dữ liệu</h3>
+  <ul>
+    <li><strong>Zod ở biên</strong> — giới hạn độ dài tên, mô tả, CV 20.000 ký tự, số năm 0–40; sai trả 400 kèm thông điệp tiếng Việt.</li>
+    <li><strong>Kiểm tra quyền sở hữu</strong> — job/CV/nhãn/feedback đều lọc theo user; người khác nhận 404 thay vì 403 để không lộ sự tồn tại.</li>
+    <li><strong>Quy tắc xoá</strong> — CV đang có nhãn vàng không xoá được (409); job xoá kèm nhãn và feedback của chính job đó.</li>
+  </ul>
+
+  <h3>Bề mặt API</h3>
+<pre class="arch">
+GET  /api/health                 trạng thái DB và chế độ lưu trữ
+POST /api/auth/login|register    session cookie httpOnly, rate limit
+GET  /api/jobs                   danh sách job + số nhãn
+POST /api/jobs                   tạo job, tách kỹ năng
+GET  /api/jobs/:id/ranking       điểm, breakdown, lý do, nhãn, feedback
+POST /api/jobs/:id/feedback      relevant | not_relevant | null
+POST /api/jobs/:id/labels        nhãn vàng 0 | 1 | 2 | null
+GET  /api/candidates             thư viện CV
+POST /api/candidates             upload văn bản, tự tách kỹ năng/năm
+GET  /api/eval                   lịch sử lần chạy
+POST /api/eval                   chạy gate, lưu kết quả
+GET  /api/metrics                đếm job/CV/nhãn/feedback, p50/p95 request
+</pre>
+
+  <p>
+    UI có ba trạng thái bắt buộc: đang tải (“Đang tải workspace…”), rỗng (chưa có job/CV/lịch sử) và
+    lỗi (banner đỏ kèm nút tải lại). Các hành động đổi dữ liệu đều khóa nút theo từng ứng viên để
+    tránh bấm đúp, và thông báo kết quả nằm trong vùng <code>aria-live</code>.
+  </p>
+
+  <div class="warn">
+    Giới hạn có chủ ý: recall@10 gần bằng recall toàn pool vì mỗi job chỉ có 12 ứng viên. Golden set
+    nhỏ giúp demo nhanh, nhưng chưa đủ để kết luận về khả năng xếp hạng trên hàng trăm CV.
+  </div>
+</section>
+
+<section class="sheet compact">
+  <h2>4. Đánh đổi, số đo thật và điểm chưa hoàn thiện</h2>
+
+  <h3>Ba đánh đổi chính</h3>
+  <table>
+    <tr><th style="width:26%">Đánh đổi</th><th>Được</th><th>Mất</th></tr>
+    <tr>
+      <td>Từ vựng IDF thay vì AI</td>
+      <td>Tất định, offline, giải thích được, CV không rời server</td>
+      <td>Không hiểu ngữ nghĩa và phủ định; alias phải bảo trì tay</td>
+    </tr>
+    <tr>
+      <td>PGlite + Blob snapshot</td>
+      <td>PostgreSQL thật, không dịch vụ ngoài, deploy Vercel một lần</td>
+      <td>Một writer, đồng bộ eventual giữa các lambda, không phù hợp tải ghi lớn</td>
+    </tr>
+    <tr>
+      <td>Feedback tách khỏi gate</td>
+      <td>Không tự khen; đo được chất lượng thuần của thuật toán</td>
+      <td>Recruiter phải chấm nhãn vàng riêng, thêm một bước thủ công</td>
+    </tr>
+  </table>
+
+  <h3>Số đo trên máy local</h3>
+  <p class="small">
+    Windows, Node 24, <code>next dev</code>; 40 request xếp hạng và 6 lần chạy eval. Đây là số của môi
+    trường phát triển một máy, chưa phải benchmark production.
+  </p>
+  <table>
+    <tr><th>Phép đo</th><th>Kết quả</th><th>Ghi chú</th></tr>
+    <tr><td>Precision@5 baseline</td><td><strong>0,6667</strong></td><td>Ngưỡng 0,60 — đạt</td></tr>
+    <tr><td>Recall@10 baseline</td><td><strong>1,0000</strong></td><td>Ngưỡng 0,90 — đạt</td></tr>
+    <tr><td>MRR baseline</td><td><strong>1,0000</strong></td><td>Ngưỡng 0,80 — đạt</td></tr>
+    <tr><td>GET ranking (12 CV)</td><td>p50 36,2 ms · p95 45,5 ms</td><td>Gồm truy vấn PGlite và JSON</td></tr>
+    <tr><td>POST eval (3 job × 12 CV)</td><td>p50 47,0 ms · p95 54,5 ms</td><td>Tính điểm, gate và ghi lịch sử</td></tr>
+    <tr><td>Login sai liên tiếp</td><td>10 × 401 rồi 2 × 429</td><td>Cửa sổ 5 phút theo email + IP</td></tr>
+    <tr><td>Test tự động</td><td><strong>30/30 pass</strong></td><td>Text, match, eval, tích hợp PGlite</td></tr>
+    <tr><td>Tràn ngang 375 / 1440</td><td><strong>0 px</strong></td><td>Workspace và trang xếp hạng</td></tr>
+  </table>
+
+  <div class="two">
+    <div class="kpi"><b>0,6667</b><span>Precision@5 baseline — thấp hơn 1 vì top 5 job frontend chứa hai ứng viên backend có TypeScript.</span></div>
+    <div class="kpi"><b>30/30</b><span>Test pass, gồm 11 test tích hợp chạy PGlite trong thư mục tạm.</span></div>
+  </div>
+
+  <h3>Những chỗ còn yếu, nói thẳng</h3>
+  <ul>
+    <li><strong>Hiểu sai phủ định.</strong> “Chưa từng dùng Kubernetes” vẫn bị tính là có kỹ năng đó. Cần phân đoạn câu hoặc mô hình NER để sửa.</li>
+    <li><strong>Bỏ sót CV không có từ khoá.</strong> CV mô tả “xây hệ thống thanh toán” mà không ghi “Node.js” sẽ mất điểm phủ kỹ năng dù kinh nghiệm tương đương.</li>
+    <li><strong>Golden set nhỏ.</strong> 12 ứng viên/job khiến recall@10 gần như luôn bằng 1; chưa đủ để phát hiện lỗi xếp hạng ở đuôi dài.</li>
+    <li><strong>Chưa parse PDF/DOCX.</strong> Chỉ nhận văn bản thuần; file nhị phân bị từ chối ở phía trình duyệt.</li>
+    <li><strong>Rate limit theo instance.</strong> Serverless nhiều instance có thể vượt hạn; production cần Redis hoặc cửa sổ dùng chung.</li>
+  </ul>
+
+  <div class="note">
+    Điểm mạnh của dự án không nằm ở thuật toán thông minh nhất, mà ở chỗ mọi thay đổi đều có một
+    con số chống lại nó: golden set, ba chỉ số và một cổng fail rõ ràng.
+  </div>
+</section>
+
+<section class="sheet">
+  <h2>5. Bài học</h2>
+  <p>
+    <strong>Đo trước khi thông minh hơn.</strong> Việc đầu tiên nên làm không phải thêm embedding mà là
+    viết golden set và ba chỉ số. Khi đã có thước đo, việc thay thuật toán trở thành một thí nghiệm có
+    kết luận thay vì một niềm tin.
+  </p>
+  <p>
+    <strong>Tách tín hiệu cá nhân hoá khỏi tín hiệu đánh giá.</strong> Feedback là cách recruiter sửa
+    hành vi hệ thống, nhưng nếu dùng nó để chấm chính hệ thống thì kết quả luôn đẹp. Hai đường ống
+    riêng, một cờ <code>withFeedback</code>, đủ để giữ sự trung thực.
+  </p>
+  <p>
+    <strong>Giải thích là một phần của API, không phải trang trí.</strong> Trả về
+    <code>matchedSkills</code>, <code>missingSkills</code> và breakdown giúp UI nói được “vì sao” mà
+    không phải suy đoán lại từ điểm tổng. Nó cũng buộc mô hình chấm điểm phải có thành phần rõ ràng.
+  </p>
+  <p>
+    <strong>Viết test tích hợp cho đúng chỗ dễ vỡ.</strong> Phần scoring có test đơn vị, nhưng bug
+    thật thường nằm ở ghép dữ liệu: nhãn của job này với ranking của job khác, xoá CV đang có nhãn,
+    người dùng A đọc job của B. 11 test tích hợp PGlite bắt được nhóm lỗi đó nhanh hơn test UI.
+  </p>
+  <p>
+    <strong>Demo phải nói cả phần chưa làm.</strong> Ghi rõ recall@10 chưa có ý nghĩa vì pool nhỏ,
+    và “chưa từng dùng X” vẫn bị tính là có X, khiến người đọc tin phần còn lại hơn. Một case study
+    trung thực có giá trị hơn một bảng số toàn màu xanh.
+  </p>
+
+  <div class="note">
+    Hướng tiếp theo nếu có thêm thời gian: parse PDF/DOCX, mở rộng pool lên 50–100 CV/job để recall@10
+    có ý nghĩa, thêm chỉ số NDCG cho nhãn 2, và chuyển rate limit sang Redis khi chạy nhiều instance.
+  </div>
+</section>
+
+</body>
+</html>
